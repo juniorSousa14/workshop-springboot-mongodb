@@ -1,18 +1,30 @@
 package com.juniorjvsousa.workshop_springboot_mongodb.domain;
 
-import java.io.Serializable;
-import java.util.Objects;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+@Document(collection = "user")
 public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @Id
     private String id;
     private String name;
     private String email;
 
-    public User() {
+    @DBRef(lazy = true)
+    private List<Post> posts = new ArrayList<>();
 
+    public User() {
     }
 
     public User(String id, String name, String email) {
+        super();
         this.id = id;
         this.name = name;
         this.email = email;
@@ -42,15 +54,36 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id);
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        User other = (User) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
     }
 }
