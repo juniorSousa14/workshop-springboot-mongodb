@@ -63,8 +63,7 @@ Para executar este projeto localmente, siga os passos abaixo.
 
 1. **Clone o repositório:**
    ```bash
-   git clone [https://github.com/juniorSousa14/QRcode-Generator-Java-Spring-Boot](https://github.com/juniorSousa14/QRcode-Generator-Java-Spring-Boot)
-   cd seu-repositorio
+   git clone https://github.com/juniorSousa14/workshop-springboot-mongodb.git
    ```
 
 2. **Inicie o MongoDB:**
